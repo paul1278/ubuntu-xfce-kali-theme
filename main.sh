@@ -54,9 +54,11 @@ if ! [ "$XDG_CURRENT_DESKTOP" = "XFCE" ]; then
     error "You are not using xfce4"
     ask "Install xfce4? [Y/n] " | grep -qi "n" && exit 0
     ok "Installing xfce4"
+    ask "The installer will ask you, if you want to use lightdm or gdm3, select lightdm [ENTER] "
     exec apt install -y xfce4 lightdm
-    #dpkg-reconfigure gdm3
 fi
+
+ok "Installing deps"
 execm apt install -y gir1.2-libxfce4ui-2.0 fonts-firacode fonts-cantarell python3-newt libdpkg-perl libfile-fcntllock-perl python3-psutil
 execm apt purge -y xterm xubuntu-core gnome-*
 ok "Updating some settings"
@@ -78,6 +80,7 @@ EOF
 ok "Downloading dependencies"
 mkdir $BASE/tmp
 cd tmp
+
 execm wget $GIT_THEMES
 execm tar -xvf kali-themes-kali-master.tar.gz
 rm kali-themes-kali-master.tar.gz
@@ -90,6 +93,7 @@ execm wget $DEB_MENU
 execm wget $DEB_XFCE4_PANEL_PROFILES
 execm wget $DEB_THEMES_ALL
 execm wget $DEB_DESKTOP
+
 dpkg -i *.deb
 execm apt install -y --fix-broken
 execm apt install -y lightdm-gtk-greeter-settings xfce4-goodies
@@ -99,5 +103,6 @@ exec cp face-root.svg /usr/share/kali-themes
 execm apt autoremove -y
 execm xfce4-panel-profiles load /usr/share/xfce4-panel-profiles/layouts/Kali.tar.bz2
 cd ../../
+
 rm tmp -rf
 execm reboot
