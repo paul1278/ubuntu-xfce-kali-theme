@@ -1,0 +1,10 @@
+DEB_DESKTOP_BASE=https://http.kali.org/kali/pool/main/k/kali-themes/kali-desktop-base_2023.4.0_all.deb
+DEB_DESKTOP=https://http.kali.org/kali/pool/main/k/kali-meta/kali-desktop-xfce_2023.3.5_all.deb
+DEB_THEMES_COMMON=https://http.kali.org/kali/pool/main/k/kali-themes/kali-themes-common_2023.4.0_all.deb
+DEB_WALLPAPERS=https://http.kali.org/kali/pool/main/k/kali-wallpapers/kali-wallpapers-2023_2023.2.0_all.deb
+DEB_DEFAULTS=https://http.kali.org/kali/pool/main/k/kali-defaults/kali-defaults_2023.3.1_all.deb
+DEB_TWEAKS=https://http.kali.org/kali/pool/main/k/kali-tweaks/kali-tweaks_2023.3.2_all.deb
+DEB_MENU=https://http.kali.org/kali/pool/main/k/kali-menu/kali-menu_2023.4.4_all.deb
+DEB_XFCE4_PANEL_PROFILES=https://http.kali.org/kali/pool/main/x/xfce4-panel-profiles/xfce4-panel-profiles_1.0.14-1_all.deb
+DEB_THEMES_ALL=https://http.kali.org/kali/pool/main/k/kali-themes/kali-themes_2023.4.0_all.deb
+GIT_THEMES=https://gitlab.com/kalilinux/packages/kali-themes/-/archive/kali/master/kali-themes-kali-master.tar.gz
