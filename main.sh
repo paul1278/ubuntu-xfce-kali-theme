@@ -43,6 +43,11 @@ function ok {
     echo "$@"
 }
 
+function getUrlOfPackage {
+    NAME=`echo "$1" | grep "Package: $2" -A100 | grep -m 1 Filename | cut -c 11-`
+    echo "$DEB_MAIN$NAME"
+}
+
 if [ `whoami` != "root" ]; then
     error "Please run as root"
     exit 1
@@ -61,6 +66,7 @@ fi
 ok "Installing deps"
 execm apt install -y gir1.2-libxfce4ui-2.0 fonts-firacode fonts-cantarell python3-newt libdpkg-perl libfile-fcntllock-perl python3-psutil
 execm apt purge -y xterm xubuntu-core gnome-*
+execm apt install -y mugshot gnome-keyring
 ok "Updating some settings"
 execq gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 ok "Updating keyboard shortcuts"
@@ -81,18 +87,19 @@ ok "Downloading dependencies"
 mkdir $BASE/tmp
 cd tmp
 
+PACKAGES=`wget -q -O - $PACKAGES_KALI_ROLLING | gunzip`
+execm wget `getUrlOfPackage "$PACKAGES" kali-desktop-base`
+execm wget `getUrlOfPackage "$PACKAGES" kali-themes-common`
+execm wget `getUrlOfPackage "$PACKAGES" kali-wallpapers-2023`
+execm wget `getUrlOfPackage "$PACKAGES" kali-defaults`
+execm wget `getUrlOfPackage "$PACKAGES" kali-tweaks`
+execm wget `getUrlOfPackage "$PACKAGES" kali-menu`
+execm wget `getUrlOfPackage "$PACKAGES" xfce4-panel-profiles`
+execm wget `getUrlOfPackage "$PACKAGES" kali-themes`
+execm wget `getUrlOfPackage "$PACKAGES" kali-desktop-xfce`
 execm wget $GIT_THEMES
 execm tar -xvf kali-themes-kali-master.tar.gz
 rm kali-themes-kali-master.tar.gz
-execm wget $DEB_DESKTOP_BASE
-execm wget $DEB_THEMES_COMMON
-execm wget $DEB_WALLPAPERS
-execm wget $DEB_DEFAULTS
-execm wget $DEB_TWEAKS
-execm wget $DEB_MENU
-execm wget $DEB_XFCE4_PANEL_PROFILES
-execm wget $DEB_THEMES_ALL
-execm wget $DEB_DESKTOP
 
 dpkg -i *.deb
 execm apt install -y --fix-broken
