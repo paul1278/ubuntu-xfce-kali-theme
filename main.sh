@@ -1,6 +1,8 @@
 #!/bin/bash
 BASE=`dirname $0`
-source $BASE/sources
+GIT_THEMES=https://gitlab.com/kalilinux/packages/kali-themes/-/archive/kali/master/kali-themes-kali-master.tar.gz
+PACKAGES_KALI_ROLLING=https://http.kali.org/kali/dists/kali-rolling/main/binary-amd64/Packages.gz
+DEB_MAIN=https://http.kali.org/kali/
 
 function execq {
     "$@"
